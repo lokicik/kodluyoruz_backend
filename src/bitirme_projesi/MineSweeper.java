@@ -95,9 +95,13 @@ public class MineSweeper {
         }
     }
 
+
+
+    /////////////////////////////////////
+    // Mayın Tarlasını açık bir durumda göstermek için kullanılacak fonksiyon.
+    // Eğer girilecek satır ve sütun sayısı 42 olarak seçilirse aktifleşir.
+    /////////////////////////////////////
     void hileliGoster(boolean[][] acilmisHucreler){
-
-
         System.out.println("Seni hileci seni!");
         for (int i = 0; i < this.satir; i++) {
             for (int j = 0; j < this.sutun; j++) {
@@ -107,9 +111,9 @@ public class MineSweeper {
 
         }
         System.out.println("\n");
-
-
     }
+
+
 
 
     void oyunuBaslat() {
@@ -118,23 +122,28 @@ public class MineSweeper {
         while (true) {
             oyunTahtasiniGoruntule(acilmisHucreler);
 
+            // Oyunu oynamak için girdi alma
             System.out.println("Satır giriniz: ");
             int geciciSatir = input.nextInt();
             System.out.println("Sütun giriniz: ");
             int geciciSutun = input.nextInt();
 
+            // Hile yapmak için 42 girilmeli
             if (geciciSatir == 42 && geciciSutun == 42){
                 hileliGoster(acilmisHucreler);
                 continue;
             }
 
+            // Satır sütun geçerlilik kontrolü
             if (geciciSatir <= 0 || geciciSatir > this.satir || geciciSutun <= 0 || geciciSutun > this.sutun) {
                 System.out.println("Geçersiz satır veya sütun değeri. Lütfen tekrar deneyin.");
                 continue;
             }
 
+
             int satirIndex = geciciSatir - 1;
             int sutunIndex = geciciSutun - 1;
+
 
             if (acilmisHucreler[satirIndex][sutunIndex]) {
                 System.out.println("Bu hücre zaten açılmış. Lütfen farklı bir hücre seçin.");
@@ -145,6 +154,7 @@ public class MineSweeper {
                     oyunTahtasiniGoruntule(acilmisHucreler);
                     System.out.println("Mayına bastınız. Oyunu kaybettiniz! Skorunuz: " + this.skor);
                     break;
+
                 } else {
                     this.skor++;
                     if (this.skor == elemanSayisi - mayinSayisi){
@@ -159,19 +169,9 @@ public class MineSweeper {
                     } else {
                         break;
                     }
-
                     }
-
                 }
-
-                // İlerleyen aşamalarda oyunun kazanıldığı durumu kontrol edebilirsiniz
-                // Şu anlık sadece bir örnek olarak sonsuz bir döngü kullanıldı.
             }
-
-
         }
     }
-
-
-
 }
